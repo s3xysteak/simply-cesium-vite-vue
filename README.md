@@ -8,6 +8,8 @@ Ideally, by executing the following commands, the project should function proper
 
 ![image](https://github.com/s3xysteak/simply-cesium-vite-vue/assets/86149525/b89f114c-5bcf-4e72-85f2-864e2aec6073)
 
+If you want to customize the path of Cesium package after building, just edit the `.env` file.
+
 ## Details
 
 I will introduce to you how it works.    
