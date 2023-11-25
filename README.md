@@ -1,3 +1,8 @@
+## :zap:Before
+
+Okay, I finally build a plugin to solve the problem. Now you only need **5 seconds** to config CesiumJS. See [vite-plugin-cesium-build](https://github.com/s3xysteak/vite-plugin-cesium-build)  
+You can learn more details in this repo. Actually, the principle of `vite-plugin-cesium-build` is the same as this repository. That plugin automates the tasks performed by this repository.
+
 ## Introduction
 
 If you haven't installed pnpm, please use the following command to install the pnpm package manager:   
