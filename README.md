@@ -1,7 +1,10 @@
 ## :zap:Before
 
-Okay, I finally build a plugin to solve the problem. Now you only need **5 seconds** to config CesiumJS. See [vite-plugin-cesium-build](https://github.com/s3xysteak/vite-plugin-cesium-build)  
-You can learn more details in this repo. Actually, the principle of `vite-plugin-cesium-build` is the same as this repository. That plugin automates the tasks performed by this repository.
+Okay, I finally build a plugin to solve the problem. Now you only need **5 seconds** to config CesiumJS. See [vite-plugin-cesium-build](https://github.com/s3xysteak/vite-plugin-cesium-build).  
+
+You can learn more details in this repo. Actually, the principle of `vite-plugin-cesium-build` is the same as this repository. That plugin automates the tasks performed by this repository. 
+
+> Only early version of  `vite-plugin-cesium-build` because I cannot predict possible future changes to the plugin  
 
 ## Introduction
 
@@ -18,9 +21,13 @@ If you want to customize the path of Cesium package after building, just edit th
 ## Details
 
 I will introduce to you how it works.    
+
 Actually, all the magic happens in the vite.config.js file, where you can find more detailed code. As you may know, Cesium relies on four files: ['Assets', 'ThirdParty', 'Widgets', 'Workers']. Regardless, we need to copy them to specific locations first, so that the project continues to work correctly after being packaged. To achieve this, we use the [vite-plugin-static-copy](https://github.com/sapphi-red/vite-plugin-static-copy) plugin, which not only automatically copies them to the specified locations during packaging but also doesn't affect development.    
-Cesium is a heavyweight package, and to avoid Vite packaging it again during the build process, we need to externalize it as a dependency to speed up the packaging process and reduce the size of the output. For this purpose, we use two plugins: [vite-plugin-html](https://github.com/vbenjs/vite-plugin-html) and [vite-plugin-externals](https://github.com/crcong/vite-plugin-externals). vite-plugin-externals specifies the externalization of the Cesium dependency and avoids manipulating the rollup options. vite-plugin-html is used to import the externalized Cesium into the index.html, which prevents warnings that would occur from directly modifying the index.html file.   
-It's important to note that you still need to make a few modifications to the index.html file to specify where the code should be inserted, as detailed in line 8 of the index.html file in this repository.    
+
+Cesium is a heavyweight package, and to avoid Vite packaging it again during the build process, we need to externalize it as a dependency to speed up the packaging process and reduce the size of the output. For this purpose, we use two plugins: ~~[vite-plugin-html](https://github.com/vbenjs/vite-plugin-html)~~ `( Deprecated and implement the required functionalities it myself, see vite.config.js line37 - line44 )` and [vite-plugin-externals](https://github.com/crcong/vite-plugin-externals). vite-plugin-externals specifies the externalization of the Cesium dependency and avoids manipulating the rollup options.  
+
+~~It's important to note that you still need to make a few modifications to the index.html file to specify where the code should be inserted, as detailed in line 8 of the index.html file in this repository.~~ `( No need to modify index.html any more since vite-plugin-html has been deprecated )`    
+
 Lastly, remember to configure CESIUM_BASE_URL, which is done in /src/main.js of this repository. Specify the location after being packaged. Since we specified in vite.config.js that the dependencies should be copied to libs/cesium after packaging, CESIUM_BASE_URL can be set as libs/cesium. Once you've completed these steps, you can start developing normally!   
 
 ## Project Setup
